@@ -1,0 +1,37 @@
+# version: "3.9" (deprecated)
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: cafeteria_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cafeteria
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: cafeteria_backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cafeteria?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./frontend
+    container_name: cafeteria_frontend
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
