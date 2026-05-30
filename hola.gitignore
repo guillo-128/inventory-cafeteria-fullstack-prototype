@@ -1,0 +1,18 @@
+# Eclipse workspace metadata (NEVER upload this)
+.metadata/
+.settings/
+bin/
+
+# Java build output
+target/
+
+# Node modules
+frontend/node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
